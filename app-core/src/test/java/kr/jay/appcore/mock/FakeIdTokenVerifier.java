@@ -24,6 +24,14 @@ public class FakeIdTokenVerifier implements IdTokenVerifier {
 				"profile image url",
 				OAuthProvider.GOOGLE
 			));
+		} else if (oAuthProvider == OAuthProvider.GOOGLE && idToken.equals("google-joined-idToken")) {
+			return Optional.of(new OAuthInfo(
+				"google-joined-providerId",
+				"jay@gmail.com",
+				"joined user",
+				"profile image url",
+				OAuthProvider.GOOGLE
+			));
 		}
 		return Optional.empty();
 	}

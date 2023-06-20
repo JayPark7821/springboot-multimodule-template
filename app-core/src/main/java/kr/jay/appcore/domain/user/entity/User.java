@@ -3,6 +3,7 @@ package kr.jay.appcore.domain.user.entity;
 import java.time.LocalDateTime;
 
 import kr.jay.appcommon.model.user.OAuthProvider;
+import kr.jay.appcore.exception.external.MalformedInputException;
 
 /**
  * User
@@ -31,6 +32,12 @@ public record User(
 		final OAuthProvider provider,
 		final String nickName
 	) {
+		if (nickName == null ||
+			nickName.length() < LENGTH_NICK_NAME_MIN ||
+			nickName.length() > LENGTH_NICK_NAME_MAX
+		) {
+			throw new MalformedInputException("닉네임은 2자 이상 64자 이하로 입력해주세요");
+		}
 		return new User(
 			null,
 			providerId,

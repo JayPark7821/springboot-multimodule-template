@@ -2,14 +2,15 @@ package kr.jay.appcore.small.domain.user;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import kr.jay.appcommon.model.user.OAuthProvider;
-import kr.jay.appcore.domain.user.User;
+import kr.jay.appcore.domain.user.entity.User;
 import kr.jay.appcore.domain.user.infrastructure.UserRepository;
-import kr.jay.appcore.domain.user.service.JoinUserUseCaseImpl;
+import kr.jay.appcore.domain.user.usecase.impl.JoinUserUseCaseImpl;
 import kr.jay.appcore.domain.user.usecase.JoinUserUseCase;
 import kr.jay.appcore.mock.FakeIdTokenVerifier;
 import kr.jay.appcore.mock.FakeUserRepository;
@@ -19,7 +20,7 @@ import kr.jay.appcore.mock.FakeUserRepository;
  *
  * @author jaypark
  * @version 1.0.0
- * @date 2023/06/20
+ * @since 2023/06/20
  */
 public class JoinUserUseCaseImplTest {
 	private JoinUserUseCaseImpl sut;
@@ -42,7 +43,9 @@ public class JoinUserUseCaseImplTest {
 		sut.command(query);
 
 	    //then
-		final User user = userRepository.findByNickName(nickName).get();
+		final Optional<User> selectedUser = userRepository.findByNickName(nickName);
+		assertThat(selectedUser).isPresent();
+		final User user = selectedUser.get();
 		assertThat(user.id()).isEqualTo(1L);
 		assertThat(user.providerId()).isEqualTo("google-providerId");
 		assertThat(user.email()).isEqualTo("user-email@gmail.com");

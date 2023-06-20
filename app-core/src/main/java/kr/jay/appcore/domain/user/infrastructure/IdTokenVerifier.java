@@ -9,7 +9,7 @@ import kr.jay.appcommon.model.user.OAuthProvider;
  * @version 1.0.0
  * @date 2023/06/20
  */
-public interface VerifyIdTokenService {
+public interface IdTokenVerifier {
 
 	OAuthInfo verify( final OAuthProvider oAuthProvider, final String idToken);
 

@@ -6,7 +6,7 @@ import kr.jay.appcore.domain.user.User;
 import kr.jay.appcore.domain.user.exception.AlreadyJoinedUserException;
 import kr.jay.appcore.domain.user.exception.SameNicknameUserAlreadyExistException;
 import kr.jay.appcore.domain.user.infrastructure.UserRepository;
-import kr.jay.appcore.domain.user.infrastructure.VerifyIdTokenService;
+import kr.jay.appcore.domain.user.infrastructure.IdTokenVerifier;
 import kr.jay.appcore.domain.user.usecase.JoinUserUseCase;
 
 /**
@@ -20,20 +20,20 @@ import kr.jay.appcore.domain.user.usecase.JoinUserUseCase;
 public class JoinUserUseCaseImpl implements JoinUserUseCase {
 
 	private final UserRepository userRepository;
-	private final VerifyIdTokenService verifyIdTokenService;
+	private final IdTokenVerifier idTokenVerifier;
 
 	public JoinUserUseCaseImpl(
 		final UserRepository userRepository,
-		final VerifyIdTokenService verifyIdTokenService
+		final IdTokenVerifier idTokenVerifier
 	) {
 		this.userRepository = userRepository;
-		this.verifyIdTokenService = verifyIdTokenService;
+		this.idTokenVerifier = idTokenVerifier;
 	}
 
 	@Override
 	public void command(final Query query) {
-		final VerifyIdTokenService.OAuthInfo oAuthInfo =
-			verifyIdTokenService.verify(query.oAuthProvider(), query.idToken());
+		final IdTokenVerifier.OAuthInfo oAuthInfo =
+			idTokenVerifier.verify(query.oAuthProvider(), query.idToken());
 
 		if (userRepository.findByEmail(oAuthInfo.email()).isPresent()) {
 			throw new AlreadyJoinedUserException(oAuthInfo.email());

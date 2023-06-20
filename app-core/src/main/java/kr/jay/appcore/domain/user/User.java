@@ -14,7 +14,7 @@ import kr.jay.appcommon.model.user.OAuthProvider;
 public record User(
 	Long id,
 	String providerId,
-	String name,
+	String nickName,
 	String email,
 	String picture,
 	OAuthProvider provider,

@@ -12,9 +12,9 @@ import kr.jay.appcore.domain.user.User;
  * @date 2023/06/20
  */
 public interface UserRepository {
-	void deleteById(final Long userId);
+	void deleteById(final User user);
 
-	void save(final User user);
+	User save(final User user);
 
 	Optional<User> findByNickName(String nickName);
 

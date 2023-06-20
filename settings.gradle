@@ -1,1 +1,3 @@
 rootProject.name = 'springboot-multimodule-template'
+include 'app-core'
+include 'app-common'

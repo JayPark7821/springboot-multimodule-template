@@ -1,5 +1,7 @@
 package kr.jay.appcore.mock;
 
+import java.util.Optional;
+
 import kr.jay.appcommon.model.user.OAuthProvider;
 import kr.jay.appcore.domain.user.infrastructure.IdTokenVerifier;
 
@@ -8,21 +10,29 @@ import kr.jay.appcore.domain.user.infrastructure.IdTokenVerifier;
  *
  * @author jaypark
  * @version 1.0.0
- * @date 2023/06/20
+ * @since 2023/06/20
  */
 public class FakeIdTokenVerifier implements IdTokenVerifier {
 
 	@Override
-	public OAuthInfo verify(final OAuthProvider oAuthProvider, final String idToken) {
+	public Optional<OAuthInfo> verify(final OAuthProvider oAuthProvider, final String idToken) {
 		if (oAuthProvider == OAuthProvider.GOOGLE && idToken.equals("google-correct-idToken")) {
-			return new OAuthInfo(
+			return Optional.of(new OAuthInfo(
 				"google-providerId",
 				"user-email@gmail.com",
 				"test user",
 				"profile image url",
 				OAuthProvider.GOOGLE
-			);
+			));
+		} else if (oAuthProvider == OAuthProvider.GOOGLE && idToken.equals("google-joined-idToken")) {
+			return Optional.of(new OAuthInfo(
+				"google-joined-providerId",
+				"jay@gmail.com",
+				"joined user",
+				"profile image url",
+				OAuthProvider.GOOGLE
+			));
 		}
-		return null;
+		return Optional.empty();
 	}
 }

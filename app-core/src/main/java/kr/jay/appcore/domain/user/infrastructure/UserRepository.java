@@ -2,14 +2,14 @@ package kr.jay.appcore.domain.user.infrastructure;
 
 import java.util.Optional;
 
-import kr.jay.appcore.domain.user.User;
+import kr.jay.appcore.domain.user.entity.User;
 
 /**
  * UserRepository
  *
  * @author jaypark
  * @version 1.0.0
- * @date 2023/06/20
+ * @since 2023/06/20
  */
 public interface UserRepository {
 	void deleteById(final User user);

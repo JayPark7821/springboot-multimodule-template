@@ -5,7 +5,7 @@ package kr.jay.appcore.domain.user.exception;
  *
  * @author jaypark
  * @version 1.0.0
- * @date 2023/06/20
+ * @since 2023/06/20
  */
 public class AlreadyJoinedUserException extends RuntimeException{
 

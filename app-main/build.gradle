@@ -1,0 +1,11 @@
+dependencies {
+    implementation project(':app-core')
+    implementation project(':app-common')
+    implementation project(':app-infrastructure:app-persistence-database')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    testImplementation "io.rest-assured:rest-assured"
+}
+

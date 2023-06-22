@@ -1,3 +1,6 @@
 rootProject.name = 'springboot-multimodule-template'
 include 'app-core'
 include 'app-common'
+include 'app-main'
+include 'app-infrastructure'
+include 'app-infrastructure:app-persistence-database'

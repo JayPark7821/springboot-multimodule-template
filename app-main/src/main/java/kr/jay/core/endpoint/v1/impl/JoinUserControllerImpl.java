@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.jay.core.domain.user.usecase.JoinUserUseCase;
-import kr.jay.core.endpoint.common.response.OkResponse;
-import kr.jay.core.endpoint.common.response.Response;
 import kr.jay.core.endpoint.v1.JoinUserController;
 
 /**
@@ -27,9 +25,8 @@ public class JoinUserControllerImpl implements JoinUserController {
 	}
 
 	@Override
-	public Response<Void> join(@RequestBody final JoinUserRequest request) {
+	public void join(@RequestBody final JoinUserRequest request) {
 		joinUserUseCase.command(toQuery(request));
-		return new OkResponse<>();
 	}
 
 	private Query toQuery(final JoinUserRequest request) {

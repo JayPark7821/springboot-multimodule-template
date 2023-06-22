@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import kr.jay.core.domain.user.entity.User;
-import kr.jay.core.endpoint.common.response.Response;
 import kr.jay.core.endpoint.common.validation.ValueOfEnum;
 import kr.jay.core.model.user.OAuthProvider;
 
@@ -20,7 +19,7 @@ import kr.jay.core.model.user.OAuthProvider;
 public interface JoinUserController {
 
 	@PostMapping(ApiPathV1.USER)
-	Response<Void> join(final JoinUserRequest request);
+	void join(final JoinUserRequest request);
 
 	record JoinUserRequest(
 		@NotEmpty

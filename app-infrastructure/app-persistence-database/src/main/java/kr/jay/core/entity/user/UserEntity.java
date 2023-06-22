@@ -64,7 +64,7 @@ public class UserEntity {
 	}
 
 	public User toModel() {
-		return new User(
+		final User user = new User(
 			this.id,
 			this.providerId,
 			this.nickName,
@@ -73,6 +73,7 @@ public class UserEntity {
 			this.provider,
 			this.lastLoginAt
 		);
+		return user;
 	}
 
 	public Long getId() {

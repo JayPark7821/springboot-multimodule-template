@@ -14,7 +14,6 @@ import kr.jay.appcore.domain.user.entity.User;
 import kr.jay.appcore.domain.user.exception.AlreadyJoinedUserException;
 import kr.jay.appcore.domain.user.exception.IdTokenIsNotValidException;
 import kr.jay.appcore.domain.user.exception.SameNicknameUserAlreadyExistException;
-import kr.jay.appcore.domain.user.infrastructure.UserRepository;
 import kr.jay.appcore.domain.user.usecase.JoinUserUseCase;
 import kr.jay.appcore.domain.user.usecase.impl.JoinUserUseCaseImpl;
 import kr.jay.appcore.exception.external.MalformedInputException;
@@ -30,13 +29,13 @@ import kr.jay.appcore.mock.FakeUserRepository;
  */
 public class JoinUserUseCaseImplTest {
 	private JoinUserUseCaseImpl sut;
-	private UserRepository userRepository;
+	private FakeUserRepository fakeUserRepository;
 
 	@BeforeEach
 	void setUp() {
-		userRepository = new FakeUserRepository();
-		sut = new JoinUserUseCaseImpl(userRepository, new FakeIdTokenVerifier());
-		userRepository.save(User.create("testProviderIdJay", "jay@gmail.com", null, OAuthProvider.GOOGLE, "jay"));
+		fakeUserRepository = new FakeUserRepository();
+		sut = new JoinUserUseCaseImpl(fakeUserRepository, fakeUserRepository, new FakeIdTokenVerifier());
+		fakeUserRepository.save(User.create("testProviderIdJay", "jay@gmail.com", null, OAuthProvider.GOOGLE, "jay"));
 	}
 
 	@Test
@@ -50,7 +49,7 @@ public class JoinUserUseCaseImplTest {
 		sut.command(query);
 
 		//then
-		final Optional<User> selectedUser = userRepository.findByNickName(nickName);
+		final Optional<User> selectedUser = fakeUserRepository.findByNickName(nickName);
 		assertThat(selectedUser).isPresent();
 		final User user = selectedUser.get();
 		assertThat(user.id()).isNotNull();

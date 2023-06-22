@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-import kr.jay.appcore.domain.user.User;
+import kr.jay.appcore.domain.user.entity.User;
 import kr.jay.appcore.domain.user.infrastructure.UserRepository;
 
 /**
@@ -15,7 +15,7 @@ import kr.jay.appcore.domain.user.infrastructure.UserRepository;
  *
  * @author jaypark
  * @version 1.0.0
- * @date 2023/06/20
+ * @since 2023/06/20
  */
 public class FakeUserRepository implements UserRepository {
 

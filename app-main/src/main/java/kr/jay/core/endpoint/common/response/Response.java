@@ -11,13 +11,17 @@ import java.time.Instant;
  */
 public abstract class Response<T> {
 
-	private final Type responseType;
-	private final T body;
+	private final Type type;
 	private final Instant timestamp = Instant.now();
 
-	public Response(final Type responseType, final T body) {
-		this.responseType = responseType;
-		this.body = body;
+	public abstract T getBody();
+
+	public Response(final Type type) {
+		this.type = type;
+	}
+
+	public static <T> OkResponse<T> ok(final T payload) {
+		return new OkResponse<>(payload);
 	}
 
 	public enum Type {

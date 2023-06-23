@@ -9,11 +9,15 @@ package kr.jay.core.endpoint.common.response;
  */
 public class OkResponse<T> extends Response<T> {
 
+	private final T body;
+
 	public OkResponse(final T body) {
-		super(Type.OK, body);
+		super(Type.OK);
+		this.body = body;
 	}
 
-	public OkResponse() {
-		super(Type.OK, null);
+	@Override
+	public T getBody() {
+		return body;
 	}
 }

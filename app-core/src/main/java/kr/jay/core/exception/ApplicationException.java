@@ -10,14 +10,13 @@ package kr.jay.core.exception;
 public abstract class ApplicationException extends RuntimeException {
 	private final ErrorCodes codeBook;
 
-	public ApplicationException(ErrorCodes codeBook, String message) {
-		super(message);
+	public ApplicationException(ErrorCodes codeBook, String message, Throwable cause) {
+		super(message, cause);
 		this.codeBook = codeBook;
 	}
 
 	public ErrorCodes getCodeBook() {
 		return codeBook;
 	}
-
 }
 

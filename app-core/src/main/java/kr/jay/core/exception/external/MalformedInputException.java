@@ -1,5 +1,8 @@
 package kr.jay.core.exception.external;
 
+import kr.jay.core.exception.ErrorCodes;
+import kr.jay.core.exception.ExternalException;
+
 /**
  * MalformedInputException
  *
@@ -7,9 +10,9 @@ package kr.jay.core.exception.external;
  * @version 1.0.0
  * @since 2023/06/21
  */
-public class MalformedInputException extends RuntimeException {
+public class MalformedInputException extends ExternalException {
 
 	public MalformedInputException(final String message) {
-		super(message);
+		super(ErrorCodes.MALFORMED_INPUT, message);
 	}
 }

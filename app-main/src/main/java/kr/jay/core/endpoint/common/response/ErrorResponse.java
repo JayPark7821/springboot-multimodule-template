@@ -18,8 +18,8 @@ public class ErrorResponse extends Response<Body> {
 		this.body = body;
 	}
 
-	public static ErrorResponse create(String message, String code, Object details) {
-		return new ErrorResponse(new Body(message, code, details));
+	public static ErrorResponse create(String message, String code) {
+		return new ErrorResponse(new Body(message, code));
 	}
 
 	@Override
@@ -33,12 +33,10 @@ public class ErrorResponse extends Response<Body> {
 
 		private final String code;
 
-		private final Object details;
-
-		public Body(final String message, final String code, final Object details) {
+		public Body(final String message, final String code) {
 			this.message = message;
 			this.code = code;
-			this.details = details;
+
 		}
 
 		public String getMessage() {
@@ -49,8 +47,5 @@ public class ErrorResponse extends Response<Body> {
 			return code;
 		}
 
-		public Object getDetails() {
-			return details;
-		}
 	}
 }

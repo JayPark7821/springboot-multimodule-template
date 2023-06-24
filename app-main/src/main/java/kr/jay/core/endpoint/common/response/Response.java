@@ -24,6 +24,10 @@ public abstract class Response<T> {
 		return new OkResponse<>(payload);
 	}
 
+	public static ErrorResponse error(final String message, final String code) {
+		return ErrorResponse.create(message, code);
+	}
+
 	public enum Type {
 		OK,
 		ERROR

@@ -1,6 +1,7 @@
 package kr.jay.core.endpoint.v1.impl;
 
 import static kr.jay.core.endpoint.v1.JoinUserController.*;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import kr.jay.core.config.TestConfig;
 import kr.jay.core.endpoint.v1.ApiPathV1;
 import kr.jay.core.model.user.OAuthProvider;
@@ -45,8 +48,7 @@ class JoinUserControllerImplTest {
 			new JoinUserRequest("google-correct-idToken", "test-nickName", OAuthProvider.GOOGLE);
 
 		//when
-		//then
-		RestAssured.
+		final ExtractableResponse<Response> response = RestAssured.
 			given().log().all()
 			.contentType(ContentType.JSON)
 			.body(request).
@@ -56,6 +58,9 @@ class JoinUserControllerImplTest {
 
 			then()
 			.log().all()
-			.statusCode(HttpStatus.OK.value());
+			.extract();
+		
+		//then
+		assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 	}
 }
